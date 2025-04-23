@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Overlapped_Multi_server", "Overlapped_Multi_server.vcxproj", "{4BF1BF16-62A2-4F2D-857D-18C53F149A7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BF1BF16-62A2-4F2D-857D-18C53F149A7D}.Debug|x64.ActiveCfg = Debug|x64
+		{4BF1BF16-62A2-4F2D-857D-18C53F149A7D}.Debug|x64.Build.0 = Debug|x64
+		{4BF1BF16-62A2-4F2D-857D-18C53F149A7D}.Debug|x86.ActiveCfg = Debug|Win32
+		{4BF1BF16-62A2-4F2D-857D-18C53F149A7D}.Debug|x86.Build.0 = Debug|Win32
+		{4BF1BF16-62A2-4F2D-857D-18C53F149A7D}.Release|x64.ActiveCfg = Release|x64
+		{4BF1BF16-62A2-4F2D-857D-18C53F149A7D}.Release|x64.Build.0 = Release|x64
+		{4BF1BF16-62A2-4F2D-857D-18C53F149A7D}.Release|x86.ActiveCfg = Release|Win32
+		{4BF1BF16-62A2-4F2D-857D-18C53F149A7D}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A46DBDC0-3D55-4D6A-9CE4-C1C8F81BFEDB}
+	EndGlobalSection
+EndGlobal

@@ -49,6 +49,7 @@ int main()
     INT addr_size = sizeof(cl_addr);
 
     c_socket = accept(s_socket, reinterpret_cast<sockaddr*>(&cl_addr), &addr_size);
+    //c_socket = AcceptEx();
     if (c_socket == INVALID_SOCKET)
     {
         err_display("accept()");
