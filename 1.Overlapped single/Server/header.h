@@ -6,7 +6,7 @@
 using namespace std;
 #pragma comment (lib, "WS2_32.LIB")
 
-const short SERVER_PORT = 4000;
+const short SERVER_PORT = 9000;
 const int BUFSIZE = 256;
 
 
