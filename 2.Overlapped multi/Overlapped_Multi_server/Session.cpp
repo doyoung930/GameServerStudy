@@ -92,6 +92,8 @@ void SESSION::recv_callback(DWORD err, DWORD num_byte, LPWSAOVERLAPPED recv_over
 	{
 		delete Server::GetInstance()->m_clientSessions[s_id];
 		Server::GetInstance()->m_clientSessions.erase(s_id);
+
+		return;
 	}
 	if (Server::GetInstance()->m_clientSessions.find(s_id) != Server::GetInstance()->m_clientSessions.end())
 		Server::GetInstance()->m_clientSessions[s_id]->do_recv();
