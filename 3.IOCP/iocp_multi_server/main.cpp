@@ -14,7 +14,7 @@
 using namespace std;
 using namespace chrono;
 
-constexpr int MAX_USER = 10000;
+constexpr int MAX_USER = 200;
 
 enum COMP_TYPE { ACCEPT, RECV, SEND };
 
@@ -139,10 +139,10 @@ void ProcessPacket(int c_id, char* packet) {
 				lock_guard<mutex> ll(pl.sLock);
 				if (ST_INGAME != pl.state) continue;
 			}
-			if (pl.id = c_id) continue;
+			if (pl.id == c_id) continue;
 			SC_ADD_PLAYER_PACKET addPacket;
-			addPacket.id = pl.id;
-			strcpy_s(addPacket.name, pl.name);
+			addPacket.id = c_id;
+			strcpy_s(addPacket.name, p->name);
 			addPacket.size = sizeof(addPacket);
 			addPacket.type = SC_ADD_PLAYER;
 			addPacket.x = clients[c_id].x;
@@ -155,7 +155,7 @@ void ProcessPacket(int c_id, char* packet) {
 				lock_guard<mutex> ll(pl.sLock);
 				if (ST_INGAME != pl.state) continue;
 			}
-			if (pl.id = c_id) continue;
+			if (pl.id == c_id) continue;
 			SC_ADD_PLAYER_PACKET addPacket;
 			addPacket.id = pl.id;
 			strcpy_s(addPacket.name, pl.name);
@@ -169,10 +169,27 @@ void ProcessPacket(int c_id, char* packet) {
 	}
 
 	case CS_MOVE: {
-
+		CS_MOVE_PACKET* p = reinterpret_cast<CS_MOVE_PACKET*>(packet);
+		clients[c_id].lastMoveTime = p->move_time;
+		short x = clients[c_id].x;
+		short y = clients[c_id].y;
+		switch (p->direction) {
+		case 0: if (y > 0) --y; break;
+		case 1: if (y < W_HEIGHT - 1) ++y; break;
+		case 2: if (x > 0) --x; break;
+		case 3: if (x < W_WIDTH - 1) ++x; break;
+		}
+		clients[c_id].x = x;
+		clients[c_id].y = y;
+		for (auto& pl : clients) {
+			{
+				lock_guard<mutex> ll(pl.sLock);
+				if (ST_INGAME != pl.state) continue;
+			}
+			pl.SendMovePacket(c_id);
+		}
+		break;
 	}
-
-
 	}
 }
 
@@ -229,8 +246,8 @@ void WorkerThread(HANDLE hIocp) {
 					lock_guard<mutex> ll(clients[client_id].sLock);
 					clients[client_id].state = ST_ALLOC;
 				}
-				clients[client_id].x = (rand() % 400);
-				clients[client_id].y = (rand() % 400);
+				clients[client_id].x = 0;// (rand() % 400);
+				clients[client_id].y = 0;// (rand() % 400);
 				clients[client_id].id = client_id;
 				clients[client_id].name[0] = 0;
 				clients[client_id].prevRemain = 0;
